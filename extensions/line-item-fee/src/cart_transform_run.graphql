@@ -1,0 +1,23 @@
+query CartTransformRunInput {
+  cart {
+    lines {
+      id
+      quantity
+      cost {
+        amountPerQuantity {
+          amount
+        }
+      }
+    }
+    buyerIdentity {
+      customer {
+        id
+      }
+    }
+  }
+  localization {
+    country {
+      isoCode
+    }
+  }
+}
