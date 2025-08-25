@@ -1,16 +1,48 @@
-# Shopify App Template - Extension only
+# Shopify Checkout Tax & Fees
 
-This is a template for building an [extension-only Shopify app](https://shopify.dev/docs/apps/build/app-extensions/build-extension-only-app). It contains the basics for building a Shopify app that uses only app extensions.
+A Shopify app that adds additional fees for US customers at checkout.
 
-This template doesn't include a server or the ability to embed a page in the Shopify Admin. If you want either of these capabilities, choose the [Remix app template](https://github.com/Shopify/shopify-app-template-remix) instead.
+## What it does
 
-Whether you choose to use this template or another one, you can use your preferred package manager and the Shopify CLI with [these steps](#installing-the-template).
+- Detects when customers are shipping to the United States
+- Automatically adds a configured fee to their cart
+- Works seamlessly with Shopify's native checkout flow
 
-## Benefits
+## Installation
 
-Shopify apps are built on a variety of Shopify tools to create a great merchant experience. The [create an app](https://shopify.dev/docs/apps/getting-started/create) tutorial in our developer documentation will guide you through creating a Shopify app.
+### Store Requirements
+- Development store or Shopify Plus plan
+- Store must have Checkout Extensibility enabled
 
-This app template does little more than install the CLI and scaffold a repository.
+### Setup Steps
+
+1. **Install and deploy the app**
+   ```bash
+   npm install
+   npm run deploy
+   ```
+
+2. **Activate the function**
+   
+   After deployment, you must activate the Cart Transform function by running this GraphQL mutation from within your app:
+   
+   ```graphql
+   mutation {
+     cartTransformCreate(
+       blockOnFailure: false,
+       functionId: "YOUR_FUNCTION_ID"
+     ) {
+       cartTransform { id }
+       userErrors { field message }
+     }
+   }
+   ```
+   
+   **Important:** This mutation must be executed using your app's access token, not through GraphiQL.
+
+3. **Verify activation**
+   - Check your Partner Dashboard for function runs
+   - Test a US checkout to confirm fees are applied
 
 ## Getting started
 
