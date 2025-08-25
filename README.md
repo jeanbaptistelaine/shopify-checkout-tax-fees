@@ -8,41 +8,10 @@ A Shopify app that adds additional fees for US customers at checkout.
 - Automatically adds a configured fee to their cart
 - Works seamlessly with Shopify's native checkout flow
 
-## Installation
-
 ### Store Requirements
+
 - Development store or Shopify Plus plan
 - Store must have Checkout Extensibility enabled
-
-### Setup Steps
-
-1. **Install and deploy the app**
-   ```bash
-   npm install
-   npm run deploy
-   ```
-
-2. **Activate the function**
-   
-   After deployment, you must activate the Cart Transform function by running this GraphQL mutation from within your app:
-   
-   ```graphql
-   mutation {
-     cartTransformCreate(
-       blockOnFailure: false,
-       functionId: "YOUR_FUNCTION_ID"
-     ) {
-       cartTransform { id }
-       userErrors { field message }
-     }
-   }
-   ```
-   
-   **Important:** This mutation must be executed using your app's access token, not through GraphiQL.
-
-3. **Verify activation**
-   - Check your Partner Dashboard for function runs
-   - Test a US checkout to confirm fees are applied
 
 ## Getting started
 
